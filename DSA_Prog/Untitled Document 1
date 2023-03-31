@@ -1,0 +1,186 @@
+#include<stdio.h>
+#include<stdlib.h>
+
+
+void create (int a[], int max, int n);        
+void print(int a[],int n);
+void selection_sort (int a[],int n);
+void bubble_sort (int a[],int n);
+void linear_searching (int a[],int n);
+void binary_searching (int a[],int n);
+
+
+int main ()
+{
+    
+  int i, j, n, x;
+  int *a; 							//array a
+  printf("enter array size:\n);
+  scanf("%d",&max);                      			//max=array size
+  printf ("enter number of elements in array:\n");
+  scanf ("%d", &n); 						//n=no. of element
+  a = (int *) calloc (max, sizeof (int));
+  create (a, max, n);						//creation of array
+  
+
+  printf ("enter 1 for sorting array using selection sort:\n");
+  printf ("enter 2 for sorting array using bubble sort:\n");
+  printf ("enter 3 for searching an element in array using linear searching:\n");
+  printf ("enter 4 for searching an element in array using binary searching:\n");
+  scanf ("%d", &x);
+
+  switch (x)
+  {
+    case 1:
+            selection_sort (a, n);
+            break;
+    case 2:
+            bubble_sort (a, n);
+            break;
+    case 3:
+            linear_searching (a, n);
+            break;
+    case 4:
+            binary_searching (a, n);
+            break;
+  }        
+}
+
+
+void create (int a[], int max, int n)        //creation of array
+{
+  int i;
+  a[0]=-99;
+  if(n>=max)
+  {
+      printf("array element exceeds array size.");
+      break;
+  }
+  else
+  {
+     printf ("enter %d elements", e);
+     for (i = 0; i < n; i++)
+      	{
+      	    a[i+1]=a[i];
+      	    scanf ("%d", &a[i]);
+    	}
+  }
+  printf("%d",a[n+1]);
+}
+
+
+void print(int *a,int n)            //printing of array
+{
+    int i;
+    printf("element of sorted array are:\n");
+    for(i=0;i<n;i++)
+    {
+        //printf("%p\n",a);
+        printf("%d ",*a);
+        a++;
+    }
+    printf("\n");
+    
+}
+
+
+
+
+void selection_sort (int a[],int n)     //selection sort            
+{
+  int i, k, j, temp;
+
+  for (i = 0; i < n; i++)
+    {
+      k = i;
+      for (j = i + 1; j < n; j++)
+	  {
+	    if (a[k] > a[j])
+	    {   
+	        k = j;
+	    }
+	  }
+      temp = a[i];
+      a[i] = a[k];
+      a[k] = temp;
+
+    }
+    print(a,n);
+}
+
+
+void bubble_sort (int a[],int n)        //bubble sort
+{
+    int i,j,temp;
+    
+    for(i=0;i<n-1;i++)
+    {                                     
+        for(j=0;j<n-i-1;j++)
+        {
+            if(a[j]>a[j+1])
+            {
+                temp = a[j];
+                a[j] = a[j+1];
+                a[j+1] = temp;
+            }
+        }
+    }
+    print(a,n);
+}
+
+
+void linear_searching (int a[],int n)		//linear searching
+{
+    int i,j,ele,flag=0;
+    printf("enter the element you want to search:\n");
+    scanf("%d",&ele);
+    
+    for(i=0;i<n;i++)
+    {
+        if(a[i]==ele)
+        {
+            printf("%d is found at %dth index\n",ele,i);
+            flag=1;
+            break;
+        }
+    }
+    if(flag==0)
+    {
+        printf("%d is not found in given array\n",ele);
+    }
+
+}
+
+
+void binary_searching (int a[],int n)		//binary searching
+{
+    int i,j,flag=0,num;
+    printf("enter the element you want to search:\n");
+    scanf("%d",&num);
+    selection_sort (a, n);
+    int l=0,u,mid;
+    u=n-1;
+    
+    while(l<=u)
+    {
+        mid=(l+u)/2;
+        if(a[mid]==num)
+        {
+            printf("%d is found at %dth index\n",num,mid);
+            flag=1;
+            break;
+        }
+        if(a[mid]>num)
+        {
+            u=mid-1;
+        }
+        if(a[mid]<num)
+        {
+            l=mid+1;
+        }
+    }
+    if(flag==0)
+    printf("%d is not found in the given array\n",num);
+  
+}
+
